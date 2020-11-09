@@ -1,0 +1,19 @@
+import java.io.FileInputStream;
+
+public class line {
+	public int Line_res (String File_ride_derryctory) throws Exception {
+		
+	String File_and_derryctory_lines = File_ride_derryctory;
+	FileInputStream file_in = new FileInputStream(File_and_derryctory_lines);
+	int lin = 0;
+	int i = -1;
+	while ((i=file_in.read())!=-1) {
+		char a = (char)i;
+		if (a == '`') {
+			lin = lin + 1;
+		}
+	}
+	file_in.close();
+	return lin;
+	}
+}
