@@ -1,0 +1,16 @@
+import java.io.*;
+
+public class Ride_class  {
+	public static void not_used (String[] args) {
+	}
+	boolean ride_file(String File_ride_derryctory, String file_name, String name, 
+			String phone, String seccond_name, int length) throws Exception {
+		boolean complitle_ride=true;
+		String line_fo_writing = ("`"+length +"._"+name + "_/" + seccond_name + "/|" + phone+ "|\n"), File_and_derryctory = File_ride_derryctory+file_name;
+		FileOutputStream ride_file = new FileOutputStream(File_and_derryctory,true);
+		byte[] buffer = line_fo_writing.getBytes();
+		ride_file.write(buffer, 0, buffer.length);
+		ride_file.close();
+		return complitle_ride;
+	}
+}
