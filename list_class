@@ -1,0 +1,28 @@
+import java.io.*;
+
+public class list_class {
+	public void Show (String File_ride_derryctory, int lines) throws Exception{
+		String file_to_read = File_ride_derryctory;
+		FileInputStream file_in = new FileInputStream(file_to_read);
+		int i = 0;
+		byte [] buffer = new byte [file_in.available()];
+		file_in.read(buffer, 0, file_in.available());
+		String text = "";
+		while (i < buffer.length) {
+			if ((char)buffer[i] == '_') {
+				text += "\n";
+				i++;
+				while(i < buffer.length) {
+					if ((char)buffer[i] == '_') {
+						break;
+					}
+					text += (char)buffer[i];
+					i++;
+				}
+			}
+			i++;
+		}
+		System.out.print(text+"\n");
+		file_in.close();
+	}
+}
