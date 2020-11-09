@@ -1,0 +1,111 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main (String[] args) throws Exception {
+		Scanner in_qwestion = new Scanner(System.in);
+		command_site command_enter = new command_site();
+		nomber_of_error err = new nomber_of_error();
+		Ride_class ride = new Ride_class();
+		String derrektory = ("/home/es/devolop/"), file_name = ("cart.txt");
+		String Seccond_name = "empt", Name = "empt", Phone = "empt";
+		list_class list = new list_class();
+		boolean continue_qwestion = true;
+		String holder = derrektory+file_name;
+		line line_cos = new line();
+//		return_info info = new return_info();
+		
+		System.out.printf("Указать новый путь к файлу? Y/N (будет использоваться по умолчанию)");
+		String qwestion_file_holder = in_qwestion.nextLine();
+		if (qwestion_file_holder.equalsIgnoreCase("Y")) {
+			System.out.println("Введите новую дерректорию: ");
+			String holder_1 = in_qwestion.nextLine();
+			holder = holder_1+file_name;
+		}
+		
+		checkFile Check = new checkFile();
+		if (Check.check(holder) == false) {
+			err.err_001();
+			continue_qwestion = false;
+		}
+		System.out.println("Введите комманду:");
+		command_enter.command_help();
+		while (continue_qwestion == true) {				
+			String command = in_qwestion.nextLine();
+			if (command.equalsIgnoreCase("newCart") == true || command.equalsIgnoreCase("nc") == true) {
+				command_enter.command_newCart();
+				String Date_on_person =  in_qwestion.nextLine();
+				String [] Date_Split = Date_on_person.split(" ");
+				int i = 1;
+				for (String Date_splitet : Date_Split) {
+					if (i == 1) { Name = Date_splitet;
+					} else if (i == 2) { Seccond_name = Date_splitet;
+					} else if (i == 3) { Phone = Date_splitet;
+					} else {i = i + 100; }
+					i++;
+				}
+				int length = line_cos.Line_res(holder);
+				if (ride.ride_file(derrektory,file_name,Name,Phone,Seccond_name,length) == true) {
+					command_enter.command_save_complite();
+				} else { err.err_002(); }
+				command_enter.command_enter_command();
+			} else if (command.equalsIgnoreCase("list") == true) {
+				int lines = line_cos.Line_res(holder);
+				list.Show(holder,lines);
+				command_enter.command_enter_command();
+			}else if (command.equalsIgnoreCase("moreinfo") == true) {
+			/*	command_enter.command_enter_name();
+				String name_to_info = in_qwestion.nextLine();
+				String a = info.info_person(name_to_info, holder);
+				System.out.println(a);
+			*/	System.out.print("В разработке, попробуйте позже");
+				command_enter.command_enter_command();
+			}else if (command.equalsIgnoreCase("line") == true) {
+				System.out.println (line_cos.Line_res(holder));
+			} else if (command.equalsIgnoreCase("edit") == true) {
+				System.out.println("В разработке, попробуйте позже");
+			} else if (command.equalsIgnoreCase("exit") == true) {
+				command_enter.command_exit();
+				continue_qwestion = false;
+			}else if (command.equals("help")) {
+				command_enter.command_help();
+			} else {
+				System.out.println("err\nДля вызова помоши - help");
+			}				
+		}
+		in_qwestion.close();
+	}
+}
+class command_site {
+	public void command_help () {
+		System.out.println ("newCart или nc - Новая карточка\nlist	-	список данных\nedit	-	редактирование"
+				+"\nmoreinfo	-	доп информация" + "\nhelp	-	список комманд\nexit	-	выход");
+	}
+	public void command_newCart() {
+		System.out.println("Создание новой карточки\nВведите Имя, фамилию, телефон через пробел");
+		
+	}
+	public void command_exit() {
+		System.out.println("выход из программы");
+	}
+	public void command_enter_name() {
+		System.out.println("Введите имя:");
+	}
+	public void command_enter_command() {
+		System.out.println("Введите команду");
+	}
+	public void command_save() {
+		System.out.println("Сохранить? Y/N");
+	}
+	public void command_save_complite() {
+		System.out.println("Сохраненно!");
+	}
+}
+
+class nomber_of_error {
+	public void err_001() {
+		System.out.printf("Error 001\nПроблемма при создании\\\\чтении файла\nпроверьте расположение");
+	}
+	public void err_002() {
+		System.out.println("Error 002\nПроблемма при записи файла");
+	}
+}
