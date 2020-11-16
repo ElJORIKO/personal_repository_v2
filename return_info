@@ -1,0 +1,67 @@
+import java.io.*;
+import java.util.ArrayList;
+
+public class return_info {
+	public String info_person (String Name, String holder) throws Exception {
+		String info_name ="", text = "";
+		int i = 0, line = 0, count = -1;
+		FileInputStream file = new FileInputStream(holder);
+		byte [] names = new byte[file.available()];
+		file.read(names, 0, file.available());
+		String name = Name, containt_name = "";
+		ArrayList<String> people = new ArrayList<String>();
+		
+		while (i < names.length) {
+			if (names[i] == '_') {
+				while (i < names.length) {
+					i++;
+					if (names[i] == '_') {
+						break;
+					} // if
+					containt_name += (char)names[i];
+				} //while	
+			} // if
+			if (containt_name!="") {
+				people.add(containt_name);
+				containt_name = "";
+			} //if	
+			i++;
+		} //while
+		if (people.contains(name)) {
+			i=0; line = people.indexOf(name);
+			while (i<names.length) {
+				if ((char)names[i] == '`') {
+					count++;
+					if (count == line) {
+						i++;
+						while (i<names.length) {
+								text += (char)names[i];
+								i++;
+								if ((char)names[i]=='~') { break; }
+						} //while
+					} //if
+				} //if
+				i++;
+			} //while
+		} //if
+		char[] out_lines = new char [text.length()];
+		out_lines = text.toCharArray(); i=0;
+		while (i<out_lines.length) {
+			if ((char)out_lines[i] == '.') {
+				out_lines[i] = ' ';
+			} else if (out_lines[i] == '_') {
+				out_lines[i] = ' ';
+			} else if (out_lines[i] == '/') {
+				out_lines[i] = ' ';
+			} else if (out_lines[i] == '/') {
+				out_lines[i] = ' ';
+			} else if (out_lines[i] == '|') {
+				out_lines[i] = ' ';
+			} else {
+				info_name += out_lines[i];
+			} i++;
+		}		
+		file.close();
+		return info_name;
+	}
+}
