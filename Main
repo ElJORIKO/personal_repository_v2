@@ -53,11 +53,10 @@ public class Main {
 				list.Show(holder,lines);
 				command_enter.command_enter_command();
 			}else if (command.equalsIgnoreCase("moreinfo") == true) {
-			/*	command_enter.command_enter_name();
+				command_enter.command_enter_name();
 				String name_to_info = in_qwestion.nextLine();
-				String a = info.info_person(name_to_info, holder);
-				System.out.println(a);
-			*/	System.out.print("В разработке, попробуйте позже");
+				String result = info.info_person(name_to_info, holder);
+				System.out.println(result);
 				command_enter.command_enter_command();
 			}else if (command.equalsIgnoreCase("line") == true) {
 				System.out.println (line_cos.Line_res(holder));
