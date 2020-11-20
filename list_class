@@ -5,24 +5,29 @@ public class list_class {
 		String file_to_read = File_ride_derryctory;
 		FileInputStream file_in = new FileInputStream(file_to_read);
 		int i = 0;
-		byte [] buffer = new byte [file_in.available()];
-		file_in.read(buffer, 0, file_in.available());
 		String text = "";
-		while (i < buffer.length) {
-			if ((char)buffer[i] == '_') {
-				text += "\n";
-				i++;
-				while(i < buffer.length) {
-					if ((char)buffer[i] == '_') {
-						break;
-					}
-					text += (char)buffer[i];
+		while ((i=fr.read())!=-1) {
+			 text += (char)i;
+		 }//while
+		 char[] ar = text.toCharArray();
+		 System.out.print(ar.length+"\n");
+		 i = 0; text = "";
+		 
+		 while (i < ar.length) {
+			 if ((char)ar[i] == '_') {
+					text += "\n";
 					i++;
-				}
-			}
-			i++;
-		}
-		System.out.print(text+"\n");
-		file_in.close();
-	}
-}
+					while(i < ar.length) {
+						if ((char)ar[i] == '_') {
+							break;
+						} //if
+						text += (char)ar[i];
+						i++;
+					} //while
+				}//if
+				i++;
+		 }//while
+		 System.out.print(text + "\n");
+		 fr.close();
+	}//Show
+}//list_classl
